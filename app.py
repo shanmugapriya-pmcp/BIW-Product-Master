@@ -2,14 +2,22 @@ import json
 import os
 from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
+import re
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STOPWORDS = {"the", "a", "an", "for", "with", "of", "and", "in", "on"}
+
+
+
 DATA_FILE = os.path.join(BASE_DIR, "data", "products_master.json")
 IMAGES_DIR = os.path.join(BASE_DIR, "static", "images")
 
 app = Flask(__name__)
 CORS(app)  # allow calls from Odoo / any origin
 
+def tokenize(text):
+    words = re.findall(r"[a-z0-9]+", text.lower())
+    return [w for w in words if w not in STOPWORDS]
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # ---------- Data loading ----------
 
 def load_products():
@@ -119,8 +127,14 @@ def agent_lookup():
     if not query:
         return jsonify({"found": False, "message": "No query provided."}), 400
 
+    query_words = set(tokenize(query))
+    if not query_words:
+        return jsonify({"found": False, "message": "No usable search terms."})
+
     products = load_products()
     best_match = None
+    best_score = 0
+
     for p in products:
         haystack = " ".join([
             p.get("name", ""),
@@ -128,13 +142,36 @@ def agent_lookup():
             p.get("category", ""),
             p.get("brand", ""),
             " ".join(p.get("keywords", [])),
-        ]).lower()
-        if query in haystack:
-            best_match = p
-            break  # first match; refine ranking later if needed
+        ])
+        haystack_words = set(tokenize(haystack))
 
-    if not best_match:
+        overlap = query_words & haystack_words
+        score = len(overlap) / len(query_words)
+
+        if score > best_score:
+            best_score = score
+            best_match = p
+
+    if not best_match or best_score < 0.5:
         return jsonify({"found": False, "message": f"No product found matching '{query}'."})
+
+    product = serialize_product(best_match)
+    size_line = f"Available sizes: {', '.join(as_list(product['size']))}\n" if product.get("size") else ""
+    colour_line = f"Colours: {', '.join(as_list(product['colour']))}\n" if product.get("colour") else ""
+    reply_text = (
+        f"{product['name']} (Code: {product['code']})\n"
+        f"Category: {product['category']}\n"
+        f"Price: {product['currency']} {product['price']}\n"
+        f"{size_line}"
+        f"{colour_line}"
+        f"{product['description']}"
+    )
+
+    return jsonify({
+        "found": True,
+        "reply_text": reply_text,
+        "product": product
+    })
 def as_list(value):
     if not value:
         return []
