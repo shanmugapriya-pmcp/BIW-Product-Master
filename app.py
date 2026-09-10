@@ -135,7 +135,12 @@ def agent_lookup():
 
     if not best_match:
         return jsonify({"found": False, "message": f"No product found matching '{query}'."})
-
+def as_list(value):
+    if not value:
+        return []
+    if isinstance(value, list):
+        return value
+    return [v.strip() for v in str(value).split(",") if v.strip()]
     product = serialize_product(best_match)
     size_line = f"Available sizes: {', '.join(product['size'])}\n" if product.get("size") else ""
     colour_line = f"Colours: {', '.join(product['colour'])}\n" if product.get("colour") else ""
