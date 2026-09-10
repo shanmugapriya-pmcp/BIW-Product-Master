@@ -1,0 +1,64 @@
+{
+  "products": [
+    {
+      "id": "HOOD001",
+      "name": "Men & Women Full Sleeve Graphic Print Hooded Sweatshirt",
+      "code": "HOOD001",
+      "category": "Hoodies & Sweatshirts",
+      "brand": "",
+      "description": "Boasting a hooded neckline with practical elements, this sweatshirt comes with long sleeves, ribbed cuffs, and dual pockets. Thanks to its adjustable hood, it provides coverage when required, while the pockets add convenient space for small essentials. Sporting well-stitched sleeves and cuffs, it ensures a neat fit that retains shape even after regular wear. Courtesy of these thoughtful details, this sweatshirt offers both functionality and comfort in one.",
+      "keywords": ["hoodie", "hooded sweatshirt", "graphic print hoodie", "men women hoodie"],
+      "price": 834,
+      "currency": "INR",
+      "size": ["S", "M", "L", "XL"],
+      "colour": ["Black", "White"],
+      "stock": null,
+      "images": ["HOOD001_1.png", "HOOD001_2.png"]
+    },
+    {
+      "id": "HOOD002",
+      "name": "Girls Full Sleeve Printed Hooded Sweatshirt",
+      "code": "HOOD002",
+      "category": "Hoodies & Sweatshirts",
+      "brand": "",
+      "description": "Girls full sleeve printed hooded sweatshirt, comfortable everyday wear.",
+      "keywords": ["hoodie", "girls hoodie", "printed hooded sweatshirt"],
+      "price": 460,
+      "currency": "INR",
+      "size": ["S", "M", "L", "XL"],
+      "colour": ["Pink", "Red"],
+      "stock": null,
+      "images": ["HOOD002_1.png", "HOOD002_2.png"]
+    },
+    {
+      "id": "HOOD003",
+      "name": "Men Full Sleeve Printed, Graphic Print Hooded Sweatshirt",
+      "code": "HOOD003",
+      "category": "Hoodies & Sweatshirts",
+      "brand": "",
+      "description": "Stylish full-sleeve graphic printed hooded sweatshirt for a trendy and comfortable look.",
+      "keywords": ["hoodie", "men hoodie", "graphic print hoodie"],
+      "price": 451,
+      "currency": "INR",
+      "size": ["S", "M", "L", "XL"],
+      "colour": ["Blue", "Violet"],
+      "stock": null,
+      "images": ["HOOD003_1.png", "HOOD003_2.png"]
+    },
+    {
+      "id": "HOOD004",
+      "name": "Boys Full Sleeve Printed Hooded Sweatshirt",
+      "code": "HOOD004",
+      "category": "Hoodies & Sweatshirts",
+      "brand": "",
+      "description": "Stylish full-sleeve graphic printed hooded sweatshirt for a trendy and comfortable look.",
+      "keywords": ["hoodie", "boys hoodie", "printed hooded sweatshirt"],
+      "price": 460,
+      "currency": "INR",
+      "size": ["S", "M", "L", "XL"],
+      "colour": ["Green", "Blue"],
+      "stock": null,
+      "images": ["HOOD004_1.png", "HOOD004_2.png"]
+    }
+  ]
+}
